@@ -4,6 +4,7 @@ psycopg2>=2.7.5,<2.8.0
 Pillow>=5.3.0,<5.4.0
 gunicorn
 django-heroku
+dj-database-url
 
 # flake8>=3.6.0,<3.7.0
 flake8-black>=0.1.0,<0.2.0
