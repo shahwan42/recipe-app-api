@@ -83,10 +83,13 @@ WSGI_APPLICATION = "app.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": os.environ.get("DB_HOST"),
-        "NAME": os.environ.get("DB_NAME"),
-        "USER": os.environ.get("DB_USER"),
-        "PASSWORD": os.environ.get("DB_PASS"),
+        "HOST": os.environ.get("POSTGRES_HOST"),
+        "NAME": os.environ.get("POSTGRES_DB"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "PORT": os.environ.get("POSTGRES_PORT"),
+        "TEST": {"NAME": "test_db_5"},
+        "CONN_MAX_AGE": 60 if DEPLOYMENT != "LOCAL" else 0,
     }
 }
 
@@ -128,3 +131,6 @@ STATIC_ROOT = "/vol/web/static"
 MEDIA_ROOT = "/vol/web/media"
 
 AUTH_USER_MODEL = "core.User"
+
+
+django_heroku.settings(locals())
