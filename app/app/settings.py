@@ -11,9 +11,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import dj_database_url
-import django_heroku
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,13 +24,8 @@ SECRET_KEY = "!)9mu!v+w%_jjd5c=rbe6x-d8()279ln2b5or+&rwlyt69xfg8"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-if os.environ["DEBUG"] is False:
-    DEBUG = False
 
 ALLOWED_HOSTS = []
-
-if os.environ["DEPLOYMENT"] == "PRODUCTION":
-    ALLOWED_HOSTS += ["https://as-recipe-api.herokuapp.com/"]
 
 
 # Application definition
@@ -93,14 +85,8 @@ DATABASES = {
         "NAME": os.environ.get("DB_NAME"),
         "USER": os.environ.get("DB_USER"),
         "PASSWORD": os.environ.get("DB_PASS"),
-        "PORT": os.environ.get("DB_PORT"),
-        "TEST": {"NAME": "RECIPE_TEST_DB"},
-        "CONN_MAX_AGE": 60 if DEPLOYMENT != "LOCAL" else 0,
     }
 }
-
-# for heroku
-DATABASES["default"] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
 # Password validation
@@ -140,6 +126,3 @@ STATIC_ROOT = "/vol/web/static"
 MEDIA_ROOT = "/vol/web/media"
 
 AUTH_USER_MODEL = "core.User"
-
-
-django_heroku.settings(locals())
