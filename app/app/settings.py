@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import dj_database_url
+import django_heroku
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -30,6 +31,9 @@ if os.environ["DEBUG"] is False:
     DEBUG = False
 
 ALLOWED_HOSTS = []
+
+if os.environ["DEPLOYMENT"] == "PRODUCTION":
+    ALLOWED_HOSTS += ["https://as-recipe-api.herokuapp.com/"]
 
 
 # Application definition
